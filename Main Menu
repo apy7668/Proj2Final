@@ -1,0 +1,76 @@
+// April Bancroft  Final project  Main menu for login
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+bool IsLoggedIn()                   // This boolean is so that way we can check if the username and password match our database
+{
+	string username, password, un, pw;
+
+	cout << "Enter username: ";
+	cin >> username;
+	cout << "Enter password: ";
+	cin >> password;
+	
+	ifstream database("data\\" + username + ".txt");
+	getline(database, un);
+	getline(database, pw);
+
+	if (un == username && pw == password)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+int main()
+{
+	int menuChoice;      // This is the main menu that will pop up to the user at the beginning of the program
+
+	cout << "Hello and welcome to the Degree Tracker!";
+	cout << "Please pick one of the following options:";
+	cout << "1) Sign up for Degree Tracker";
+	cout << "2) Login";
+	cout << "3) Exit";
+
+	cin >> menuChoice;
+
+	if (menuChoice == 1)
+	{                                         // This is where users will register their username and password
+		string username, password;
+		cout << "Select a username: ";
+		cin >> username;
+		cout << "Select a password: ";
+		cin >> password;
+
+		ofstream database;
+		database.open("\\data" + username + ".txt");
+		database << username << endl;
+		database << password << endl;
+		database.close();
+
+		main();
+
+	}
+	else if (menuChoice ==2)
+	{
+		bool status = IsLoggedIn();
+
+		if (!status)
+		{
+			cout << "False Login" << endl;
+			system("pause");
+			return 0;
+		}
+		else
+		{
+			cout << "Success! You are logged in! " << endl;
+			system("pause");
+			return 1;
+		}
+	}
+}
