@@ -8,12 +8,12 @@ bool IsLoggedIn()                   // This boolean is so that way we can check 
 {
 	string username, password, un, pw;
 
-	cout << "Enter username: ";
+	cout << "Enter username: " << endl;
 	cin >> username;
-	cout << "Enter password: ";
+	cout << "Enter password: " << endl;
 	cin >> password;
 	
-	ifstream database("data\\" + username + ".txt");
+	ifstream database(username);
 	getline(database, un);
 	getline(database, pw);
 
@@ -31,24 +31,24 @@ int main()
 {
 	int menuChoice;      // This is the main menu that will pop up to the user at the beginning of the program
 
-	cout << "Hello and welcome to the Degree Tracker!";
-	cout << "Please pick one of the following options:";
-	cout << "1) Sign up for Degree Tracker";
-	cout << "2) Login";
-	cout << "3) Exit";
+	cout << "Hello and welcome to the Degree Tracker!" << endl;
+	cout << "Please pick one of the following options:" << endl;
+	cout << "1) Sign up for Degree Tracker" << endl;
+	cout << "2) Login" << endl;
+	cout << "3) Exit" << endl;
 
 	cin >> menuChoice;
 
 	if (menuChoice == 1)
 	{                                         // This is where users will register their username and password
 		string username, password;
-		cout << "Select a username: ";
+		cout << "Select a username: " << endl;
 		cin >> username;
-		cout << "Select a password: ";
+		cout << "Select a password: " << endl;
 		cin >> password;
 
 		ofstream database;
-		database.open("\\data" + username + ".txt");
+		database.open(username);
 		database << username << endl;
 		database << password << endl;
 		database.close();
